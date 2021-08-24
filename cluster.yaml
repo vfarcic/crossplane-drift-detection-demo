@@ -1,10 +1,12 @@
 apiVersion: upbound.io/v1alpha1
-kind: CompositeCluster
+kind: ClusterClaim
 metadata:
   name: crossplane
 spec:
   id: crossplane
-  compositionRef:
-    name: cluster-google
+  compositionSelector:
+    matchLabels:
+      provider: google
+      cluster: gke
   parameters:
     nodeSize: small

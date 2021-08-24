@@ -8,7 +8,7 @@ metadata:
 spec:
   compositeTypeRef:
     apiVersion: upbound.io/v1alpha1
-    kind: CompositeKubernetesCluster
+    kind: CompositeCluster
   patchSets:
   - name: metadata
     patches:
@@ -21,16 +21,14 @@ spec:
       spec:
         forProvider:
           location: us-east1
-          masterAuth:
-            username:
           initialClusterVersion: latest
         writeConnectionSecretToRef:
           namespace: upbound-system
     patches:
     - fromFieldPath: spec.id
       toFieldPath: metadata.name
-    - fromFieldPath: metadata.uid
-      toFieldPath: spec.writeConnectionSecretToRef.name
+    - fromFieldPath: "metadata.uid"
+      toFieldPath: "spec.writeConnectionSecretToRef.name"
       transforms:
       - type: string
         string:
@@ -94,4 +92,4 @@ spec:
     - type: MatchString
       fieldPath: status.atProvider.status
       matchString: RUNNING
-  writeConnectionSecretsToNamespace: upbound-system
+  writeConnectionSecretsToNamespace: crossplane-system
