@@ -6,7 +6,8 @@ spec:
   id: crossplane
   compositionSelector:
     matchLabels:
-      provider: google
-      cluster: gke
+      provider: aws
+      cluster: eks
   parameters:
     nodeSize: small
+    minNodeCount: 3
